@@ -6,5 +6,8 @@ export default defineConfig({
   base: '/sites-artisans',
   vite: {
     plugins: [tailwindcss()],
+  },
+  experimental: {
+    fonts: true
   }
 });

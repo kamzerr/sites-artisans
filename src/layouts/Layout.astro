@@ -7,8 +7,8 @@ const { frontmatter } = Astro.props;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{frontmatter.title || "Artisan Local"}</title>
-    <meta name="description" content={frontmatter.description || ""}>
+    <title>{frontmatter?.title || "Artisan Local"}</title>
+    <meta name="description" content={frontmatter?.description || ""}>
     <style>
         :root {
             --primary: #0f172a;
@@ -64,7 +64,6 @@ const { frontmatter } = Astro.props;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
-        /* Styles automatiques pour le contenu Markdown généré par l'IA */
         h2 {
             color: var(--primary);
             font-size: 1.8rem;
@@ -93,7 +92,7 @@ const { frontmatter } = Astro.props;
 <body>
 
     <header>
-        <h1>{frontmatter.artisan_name || "Votre Expert Local"}</h1>
+        <h1>{frontmatter?.title || "Votre Expert Local"}</h1>
         <p>Intervention rapide et travail de qualité près de chez vous.</p>
         <a href="#contact" class="cta-button">Demander un devis gratuit</a>
     </header>
@@ -103,7 +102,7 @@ const { frontmatter } = Astro.props;
     </main>
 
     <footer id="contact">
-        <p>Site web généré automatiquement pour <strong>{frontmatter.artisan_name}</strong> — Propulsé par n8n & Astro</p>
+        <p>Site web généré automatiquement — Propulsé par n8n & Astro</p>
     </footer>
 
 </body>

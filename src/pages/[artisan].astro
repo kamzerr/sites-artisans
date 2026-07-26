@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// 1. Cette fonction dit à Astro de générer une URL pour chaque fichier .md
+export async function getStaticPaths() {
+  // On récupère tous les fichiers Markdown situés dans le dossier "content" à la racine
+  const artisans = await Astro.glob('../../content/*.md');
+
+  return artisans.map(artisan => {
+    // On extrait le nom du fichier sans l'extension pour créer l'URL (le slug)
+    // Exemple : "capelli-sarl.md" devient la variable "capelli-sarl"
+    const nomFichier = artisan.file.split('/').pop()?.replace('.md', '');
+
+    return {
+      params: { artisan: nomFichier },
+      props: { artisan }
+    };
+  });
+}
+
+// 2. On récupère les données du fichier actuel pour l'afficher dans le Layout
+const { artisan } = Astro.props;
+const { Content, frontmatter } = artisan;
+---
+
+<Layout frontmatter={frontmatter}>
+  <Content />
+</Layout>

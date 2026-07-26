@@ -6,6 +6,7 @@ import Services from '../components/Services.astro';
 import Reviews from '../components/Reviews.astro';
 import About from '../components/About.astro';
 import CTA from '../components/CTA.astro';
+import { client } from '../data/client';
 
 // 2. Génération des URL dynamiques (Toujours avec import.meta.glob pour éviter les crashs)
 export async function getStaticPaths() {

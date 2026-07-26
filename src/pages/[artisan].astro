@@ -1,14 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// 1. Importation du Layout et des composants du thème
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Reviews from '../components/Reviews.astro';
+import About from '../components/About.astro';
+import CTA from '../components/CTA.astro';
 
-// 1. Génération des URL pour chaque fichier .md
+// 2. Génération des URL dynamiques (Toujours avec import.meta.glob pour éviter les crashs)
 export async function getStaticPaths() {
-  // Utilisation de la méthode native import.meta.glob (ultra stable)
   const artisans = Object.values(import.meta.glob('../../content/*.md', { eager: true }));
 
   return artisans.map((artisan: any) => {
     const nomFichier = artisan.file.split('/').pop()?.replace('.md', '');
-
     return {
       params: { artisan: nomFichier },
       props: { artisan }
@@ -16,11 +20,40 @@ export async function getStaticPaths() {
   });
 }
 
-// 2. Récupération des données pour l'affichage
+// 3. Récupération des données du fichier Markdown de l'artisan
 const { artisan } = Astro.props;
 const { Content, frontmatter } = artisan;
 ---
 
-<Layout frontmatter={frontmatter}>
-  <Content />
-</Layout>
+<!-- 4. Assemblage dynamique de la page -->
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  
+  <!-- Section En-tête -->
+  <Hero 
+    title={frontmatter.title} 
+    subtitle={frontmatter.description} 
+    ctaText="Demander un devis" 
+  />
+
+  <!-- Section Services (Alimentée par la liste YAML générée par l'IA) -->
+  {frontmatter.services && (
+    <Services list={frontmatter.services} />
+  )}
+
+  <!-- Section À Propos (Affiche le texte libre en Markdown) -->
+  <About title={`À propos de ${frontmatter.title}`}>
+    <Content />
+  </About>
+
+  <!-- Section Témoignages (Alimentée par la liste YAML des avis) -->
+  {frontmatter.reviews && (
+    <Reviews list={frontmatter.reviews} />
+  )}
+
+  <!-- Section Appel à l'action final -->
+  <CTA 
+    phone={frontmatter.phone} 
+    address={frontmatter.address} 
+  />
+
+</BaseLayout>

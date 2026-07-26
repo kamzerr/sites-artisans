@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// On récupère tous les artisans générés
-const artisans = await Astro.glob('../../content/*.md');
+// On utilise import.meta.glob ici aussi pour plus de sécurité
+const artisans = Object.values(import.meta.glob('../../content/*.md', { eager: true }));
 
-// On définit un frontmatter virtuel pour la page d'accueil afin d'alimenter le Layout
 const frontmatter = {
   title: "Annuaire des Artisans Locaux",
   description: "Trouvez les meilleurs artisans près de chez vous."
@@ -16,7 +15,7 @@ const frontmatter = {
   <p>Découvrez notre sélection de professionnels qualifiés, prêts à intervenir :</p>
 
   <div class="artisan-grid">
-    {artisans.map(artisan => {
+    {artisans.map((artisan: any) => {
       const slug = artisan.file.split('/').pop()?.replace('.md', '');
       return (
         <a href={`/sites-artisans/${slug}`} class="artisan-card">

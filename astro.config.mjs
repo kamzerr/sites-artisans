@@ -6,19 +6,5 @@ export default defineConfig({
   base: '/sites-artisans',
   vite: {
     plugins: [tailwindcss()],
-  },
-  experimental: {
-    fonts: [
-      {
-        name: 'Inter',
-        cssVariable: '--font-body',
-        provider: 'google',
-      },
-      {
-        name: 'Oswald',
-        cssVariable: '--font-display',
-        provider: 'google',
-      }
-    ]
   }
 });

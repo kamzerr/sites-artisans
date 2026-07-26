@@ -8,6 +8,17 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   experimental: {
-    fonts: []
+    fonts: [
+      {
+        name: 'Inter',
+        cssVariable: '--font-body',
+        provider: 'google',
+      },
+      {
+        name: 'Oswald',
+        cssVariable: '--font-display',
+        provider: 'google',
+      }
+    ]
   }
 });

@@ -8,6 +8,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   experimental: {
-    fonts: true
+    fonts: []
   }
 });

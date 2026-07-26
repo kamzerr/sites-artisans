@@ -6,7 +6,12 @@
  *  • <Font />         — built-in font optimizer from astro.config.mjs fonts array
  *  • <ClientRouter /> — client-side navigation with CSS transition animations
  */
-import { Font } from 'astro:assets';
+<head>
+  <!-- Vos balises meta existantes... -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+</head>
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { brand } from '../config/brand';
